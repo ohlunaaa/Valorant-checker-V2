@@ -176,6 +176,6 @@ def checker():
         except:
             if choice == 2:
                 print(f"{Fore.BLUE}[2FA]{Fore.RESET} {username}:{password} Type: {typebanned}")
-            return
+            continue
 
 checker()
