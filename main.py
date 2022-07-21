@@ -166,6 +166,8 @@ def checker():
                 bannedtxt.close()
                 if choice == 2:
                     print(f"{Fore.RED}[Banned]{Fore.RESET} {username}:{password} Type: {typebanned}")
+                    if choice == 3:
+                        print(f"{Fore.RED}[Banned]{Fore.RESET} {username}:{password} Type: {typebanned}")
                 perban += 1
                 continue
             elif typebanned == "TIME_BAN":
@@ -180,6 +182,8 @@ def checker():
                 bannedtxt1.write(f"[--------------[Valorant]--------------]\n| User&Pass: {username}:{password}\n| Banntype: {typebanned}\n| Expire {result_s1}\n| Creattion: {result_s}\n|[-------------------------------------]\n\n")
                 bannedtxt1.close()
                 if choice == 2:
+                    print(f"{Fore.RED}[Banned]{Fore.RESET} {username}:{password} Type: {typebanned}")
+                if choice == 3:
                     print(f"{Fore.RED}[Banned]{Fore.RESET} {username}:{password} Type: {typebanned}")
                 timeban += 1
                 continue
