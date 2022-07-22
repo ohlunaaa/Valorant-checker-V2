@@ -51,7 +51,7 @@ def checker():
         print("Option 3 is a dynamic full caputure checker")
         exit()
 
-    file1 = open('combo.txt', 'r')
+    file1 = open('combo.txt', "r", encoding='utf-8')
     lines = file1.readlines()
     with open("combo.txt", 'r+', encoding='utf-8') as e:
         ext = e.readlines()
