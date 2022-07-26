@@ -419,11 +419,12 @@ def checker():
                     details = item.split("|")
                     namePart = details[0]
                     idPart = details[1]
-                    name = namePart.split(":")[1]
+                    name = namePart.split(":")[1].split(' Level')[0]
                     id = idPart.split(":")[0].lower()
                     if id == UidToSearch:
-                        userSkins.append(name)
-                        SkinStr += "| " + name + "\n"
+                        if name not in SkinStr:
+                            userSkins.append(name)
+                            SkinStr += "| " + name + "\n"
 
             if typebanned == None:
                 typebanned = "Unbanned"
