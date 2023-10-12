@@ -1,8 +1,9 @@
 # Valorant-Checker-V2
 -----
 ## Information
-- ⭐ If you have something to add join the dc server https://discord.gg/fTmJmasvMm
+- ⭐ If you have something to add join the dc server https://discord.gg/aUFkbXAB
 - 🎈 Leave a star to support this projekt
+  ## New Update download now https://discord.gg/aUFkbXAB
 -----
 
 ## Option 1 GUI
