@@ -101,7 +101,6 @@ def checker():
     for line in lines:
         username = line.split(":")[0].replace('\n', '')
         password = line.split(":")[1].replace('\n', '')
-        ctypes.windll.kernel32.SetConsoleTitleW(f"Valorant checker | Good: {good} | Timebanned: {timeban} | Permbanned: {perban} | Not exist: {notexist} | Ratelimited: {rate} | Checked: {checked}/{num}")
         if choice == 1:
             os.system("cls")
             print("")
